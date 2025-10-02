@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <style>
+        body {
+            background-color: white;
+            color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-image: url(https://images.steamusercontent.com/ugc/45706733114526190/5AD9E4486D90BB71D1A541932BB75D881CF793E9/?imw=200&imh=200&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center bottom;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/gif" href="https://i.pinimg.com/originals/cb/bc/9a/cbbc9a35f2a20532d7d52ca36fb38aac.gif">
+    <title>TETO TETO TETO</title>
+</head>
+
+<body>
+    <h1 style="margin-top: 10px; text-align: center; color: darkmagenta;">ТЕТО КОРОЛЕВА МИРА</h1>
+    
+    <!-- Аудиоплеер -->
+    <audio id="tetoAudio" style="display: none;">
+        <source src="https://www.dropbox.com/scl/fi/2sbnk2pvxxg17pnr80pgk/Satsuki_feat_Hatsune_Miku_Kasane_Teto_-_Mesmerizer_77932546.mp3?rlkey=sxgrld9bfbbqmsv8tsg8k8q9b&raw=1" type="audio/mpeg">
+    </audio>
+    
+    <!-- Основная кнопка -->
+    <button onclick="playWithConfetti()" 
+            style="
+                background: linear-gradient(45deg, #ff00ff, #ff1493);
+                color: white;
+                border: none;
+                padding: 15px 30px;
+                margin: 15px;
+                border-radius: 25px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+                box-shadow: 0 5px 15px rgba(255, 0, 255, 0.4);
+            "
+            onmouseover="this.style.transform='scale(1.05)'" 
+            onmouseout="this.style.transform='scale(1)'"
+            id="musicButton">
+        🎵 здесь ты обретешь счастье 🎵
+    </button>
+
+    <!-- Кнопка спойлера -->
+    <button onclick="showSpoiler()" 
+           style="
+               position: fixed;
+               bottom: 20px;
+               right: 20px;
+               background: rgba(255, 20, 147, 0.3);
+               color: #ff00ff;
+               border: 1px solid #ff00ff;
+               padding: 10px 15px;
+               border-radius: 10px;
+               font-size: 14px;
+               cursor: pointer;
+               transition: all 0.3s ease;
+               z-index: 1000;
+           "
+           onmouseover="this.style.background='rgba(255, 20, 147, 0.4)'; this.style.boxShadow='0 0 20px #ff00ff'" 
+           onmouseout="this.style.background='rgba(255, 20, 147, 0.2)'; this.style.boxShadow='none'">
+        ⚠️ СПОЙЛЕР!!!!!!!!!!! ⚠️
+    </button>
+
+    <!-- Скрытая картинка спойлера -->
+    <div id="spoilerContainer" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; display: flex; justify-content: center; align-items: center;">
+        <img src="https://avatars.mds.yandex.net/i?id=c05048f3d7675e2da6f9ff77a094940231feedf4-5333993-images-thumbs&n=13" 
+             style="max-width: 90%; max-height: 90%; border: 3px solid #ff00ff; box-shadow: 0 0 50px rgba(255, 0, 255, 0.8);">
+        
+        <!-- Кнопка закрытия -->
+        <button onclick="hideSpoiler()" 
+                style="
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+                    background: red;
+                    color: white;
+                    border: none;
+                    padding: 10px 15px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    font-size: 20px;
+                    z-index: 10001;
+                ">✕</button>
+    </div>
+
+    <div id="confetti" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999;"></div>
+
+    <script>
+        function showSpoiler() {
+            document.getElementById('spoilerContainer').style.display = 'flex';
+        }
+        
+        function hideSpoiler() {
+            document.getElementById('spoilerContainer').style.display = 'none';
+        }
+function playWithConfetti() {
+    var audio = document.getElementById('tetoAudio');
+    audio.play();
+    
+    // Показываем конфетти
+    var confetti = document.getElementById('confetti');
+    confetti.style.display = 'block';
+    confetti.innerHTML = '';
+    
+    // Создаем конфетти
+    for (var i = 0; i < 50; i++) {
+        var dot = document.createElement('div');
+        dot.style.position = 'absolute';
+        dot.style.width = '10px';
+        dot.style.height = '10px';
+        dot.style.background = ['#ff00ff', '#00ffff', '#ffff00', '#ff1493'][Math.floor(Math.random() * 4)];
+        dot.style.borderRadius = '50%';
+        dot.style.left = Math.random() * 100 + 'vw';
+        dot.style.top = '-10px';
+        dot.style.animation = `fall ${Math.random() * 2 + 1}s linear forwards`;
+        confetti.appendChild(dot);
+    }
+    
+    // Убираем конфетти через 3 секунды
+    setTimeout(function() {
+        confetti.style.display = 'none';
+    }, 3000);
+}
+</script>
+
+<style>
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+
+</body>
+</html>
